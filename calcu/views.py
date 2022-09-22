@@ -36,71 +36,76 @@ def index(r):
     top = -1
     stack[top] = "00"
 
-    save = 0
-    i = 0
-    while i < lstr:
+    def gotohome(st2, topans, top):  # add stack and ans array
+        save = 0
+        i = 0
+        l = len(st2)
+        while i < l:
+            if not st2[i].isdigit():
 
-        if not st2[i].isdigit():
-            sub = st2[save:i]
-            save = i + 1
+                sub = st2[save:i]  # cut number that is left side of operator.
+                save = i + 1  # update save to first of right side number of operator.
 
-            ans[topans] = sub
-            topans += 1
+                ans[topans] = sub  # the number into ans array.
 
-            if st2[i] == '+':
-                num = getnum(stack[top])
-                if 2 > num or 2==num:
-                    top += 1
-                    stack[top] = "+2"
+                topans += 1
 
-                elif 2 < num:
-                    # top += 1
-                    ans[topans] = stack[top]
-                    stack[top] = "+2"
-                    topans += 1
-            elif st2[i] == '-':
-                num = getnum(stack[top])
-                if 1 > num or 1==num:
-                    top += 1
-                    stack[top] = '-1'
+                if st2[i] == '+':
+                    num = getnum(stack[top])
+                    if 2 > num or 2 == num:
+                        top += 1
+                        stack[top] = "+2"
 
-                elif 1 < num:
-                    ans[topans] = stack[top]
-                    stack[top] = '-1'
-                    topans += 1
-            elif st2[i] == '*':
-                num = getnum(stack[top])
-                if 4 > num or 4==num:
-                    top += 1
-                    stack[top] = '*4'
+                    elif 2 < num:
+                        ans[topans] = stack[top]
+                        stack[top] = "+2"
+                        topans += 1
+                elif st2[i] == '-':
+                    num = getnum(stack[top])
+                    if 1 > num or 1 == num:
+                        top += 1
+                        stack[top] = '-1'
 
-                elif 4 < num:
-                    ans[topans] = stack[top]
-                    stack[top] = '*4'
-                    topans += 1
-            elif st2[i] == '/':
-                num = getnum(stack[top])
-                if 3 > num or 3==num:
-                    top += 1
-                    stack[top] = '/3'
+                    elif 1 < num:
+                        ans[topans] = stack[top]
+                        stack[top] = '-1'
+                        topans += 1
+                elif st2[i] == '*':
+                    num = getnum(stack[top])
+                    if 4 > num or 4 == num:
+                        top += 1
+                        stack[top] = '*4'
 
-                elif 3 < num:
-                    ans[topans] = stack[top]
-                    stack[top] = '/3'
-                    topans += 1
-            elif st2[i] == '^':
-                num = getnum(stack[top])
-                if 5 > num or 5==num:
-                    top += 1
-                    stack[top] = '^5'
+                    elif 4 < num:
+                        ans[topans] = stack[top]
+                        stack[top] = '*4'
+                        topans += 1
+                elif st2[i] == '/':
+                    num = getnum(stack[top])
+                    if 3 > num or 3 == num:
+                        top += 1
+                        stack[top] = '/3'
 
-                elif 5 < num:
-                    ans[topans] = stack[top]
-                    stack[top] = '^5'
-                    topans += 1
-        i += 1
-    sub = st2[save:i]
-    ans[topans] = sub
+                    elif 3 < num:
+                        ans[topans] = stack[top]
+                        stack[top] = '/3'
+                        topans += 1
+                elif st2[i] == '^' or 5 == num:
+                    num = getnum(stack[top])
+                    if 5 > num:
+                        top += 1
+                        stack[top] = '^5'
+
+                    elif 5 < num:
+                        ans[topans] = stack[top]
+                        stack[top] = '^5'
+                        topans += 1
+
+            i += 1
+
+        sub = st2[save:i]  # lastes number into a sub.
+        ans[topans] = sub  # and then goto ans(answer) array.
+        return top
 
     def stackintoArr(s2, stack3, t):
         i = 0
@@ -110,13 +115,6 @@ def index(r):
             if s2[i] == '00':
                 s2[i] = stack3[t]
                 t -= 1
-            i += 1
-
-    def zero(st):
-        i = 0
-        l = len(st)
-        while i < l:
-            st[i] = 0
             i += 1
 
     def isfloat(w):
@@ -132,7 +130,7 @@ def index(r):
         i = 0
         l = len(arr)
         top = -1
-        zero(stack2)
+        #zero(stack2)
         while i < l:
             if arr[i].isdigit():
                 top += 1
