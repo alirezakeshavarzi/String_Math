@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
-
+from django.views import generic
 import math
 
 import math
 
 
-class classname():
+class strmath():
     i = 0
     save = 0
     lste = 0
@@ -200,20 +200,36 @@ class classname():
         return self.stack[0]
 
 
-m = classname('5^5')
-m.pr()
 
-def index(r):
+
+'''def index(r):
     st2 = r.GET.get('str', False)
     temp = loader.get_template('index.html')
 
     st2 = str(st2)
-    m = classname(st2)
+    m = strmath(st2)
     try:
         res = m.pr()
     except ZeroDivisionError:
         res = "Undefined"
 
     c = {'res':res, 'a':st2}
-    return HttpResponse(temp.render(c,r))
+    return HttpResponse(temp.render(c,r))'''
+
+class index(generic.ListView):
+    #template_name = 'index.html'
+
+    def get(self,r):
+        st2 = r.GET.get('str', False)
+
+        st2 = str(st2)
+        m = strmath(st2)
+        try:
+            res = m.pr()
+        except ZeroDivisionError:
+            res = "Undefined"
+
+        c = {'res': res, 'a': st2}
+        return render(r, 'index.html', c)
+
 # Create your views here.
