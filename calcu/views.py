@@ -4,211 +4,215 @@ from django.http import HttpResponse
 
 import math
 
+import math
 
-def initio(str):
+
+class classname():
     i = 0
-    lo = len(str)
-    while i < lo:
-        str[i] = "00"
-        i += 1
-
-
-def getnum(str):
-    i = 0
-    l = len(str)
-    while i < l:
-        if str[i].isdigit():
-            return int(str[i])
-            break
-
-        i += 1
-
-
-
-
-def gotohome(stack,ans,st2, topans, top):  # add stack and ans array
     save = 0
-    i = 0
-    l = len(st2)
-    while i < l:
-        if not st2[i].isdigit():
-
-            sub = st2[save:i]  # cut number that is left side of operator.
-            save = i + 1  # update save to first of right side number of operator.
-
-            ans[topans] = sub  # the number into ans array.
-
-            topans += 1
-
-            if st2[i] == '+':
-                num = getnum(stack[top])
-                if 2 > num or 2 == num:
-                    top += 1
-                    stack[top] = "+2"
-
-                elif 2 < num:
-                    ans[topans] = stack[top]
-                    stack[top] = "+2"
-                    topans += 1
-            elif st2[i] == '-':
-                num = getnum(stack[top])
-                if 1 > num or 1 == num:
-                    top += 1
-                    stack[top] = '-1'
-
-                elif 1 < num:
-                    ans[topans] = stack[top]
-                    stack[top] = '-1'
-                    topans += 1
-            elif st2[i] == '*':
-                num = getnum(stack[top])
-                if 4 > num or 4 == num:
-                    top += 1
-                    stack[top] = '*4'
-
-                elif 4 < num:
-                    ans[topans] = stack[top]
-                    stack[top] = '*4'
-                    topans += 1
-            elif st2[i] == '/':
-                num = getnum(stack[top])
-                if 3 > num or 3 == num:
-                    top += 1
-                    stack[top] = '/3'
-
-                elif 3 < num:
-                    ans[topans] = stack[top]
-                    stack[top] = '/3'
-                    topans += 1
-            elif st2[i] == '^':
-                num = getnum(stack[top])
-                if 5 > num:
-                    top += 1
-                    stack[top] = '^5'
-
-                elif 5 < num:
-                    ans[topans] = stack[top]
-                    stack[top] = '^5'
-                    topans += 1
-
-        i += 1
-
-    sub = st2[save:i]  # lastes number into a sub.
-    print('topnes in funv : ', topans)
-    ans[topans] = sub  # and then goto ans(answer) array.
-    return top
-
-
-def stackintoArr(s2, stack3, t):
-    i = 0
-    t = t
-    l = len(s2)
-    while i < l:
-        if s2[i] == '00':
-            s2[i] = stack3[t]
-            t -= 1
-        i += 1
-
-
-def isfloat(w):
-    w = str(w)
-    i = 0
-    l = len(w)
-    while i < l:
-        if w[i] == '.':
-            return True
-        i += 1
-
-
-def cal(arr, stack2):
-    i = 0
-    l = len(arr)
+    lste = 0
+    ans = [None] * 1
+    stack = [None] * 1
+    topans = 0
     top = -1
-    # zero(stack2)
-    while i < l:
-        if arr[i].isdigit():
-            top += 1
-            stack2[top] = arr[i]
 
-        else:
-            if arr[i] == '+2':
-                if isfloat(stack2[top - 1]) or isfloat(stack2[top]):
-                    stack2[top - 1] = float(stack2[top - 1]) + float(stack2[top])
-                    stack2[top] = 0
-                    top -= 1
-                else:
-                    stack2[top - 1] = int(stack2[top - 1]) + int(stack2[top])
-                    stack2[top] = 0
-                    top -= 1
+    def __init__(self, st2):
+        self.st2 = st2
+        self.lste = len(self.st2)
+        self.ans = [None] * self.lste
+        self.stack = [None] * self.lste
+        self.initio(self.ans)
+        self.initio(self.stack)
+
+    def initio(self, str):  # set all ans array to zero(string)
+        i = 0
+        lo = len(str)
+        while i < lo:
+            str[i] = "00"
+            i += 1
+
+    def getnum(self, str):  # get number of each operator
+        i = 0
+        l = len(str)
+        while i < l:
+            if str[i].isdigit():
+                return int(str[i])
+                break
+
+            i += 1
+
+    def gotohome(self):  # add stack and ans array
+        l = self.lste
+        while self.i < l:
+
+            if not self.st2[self.i].isdigit():
+
+                sub = self.st2[self.save:self.i]  # cut number that is left side of operator.
+                self.save = self.i + 1  # update save to first of right side number of operator.
+
+                self.ans[self.topans] = sub  # the number into ans array.
+
+                self.topans += 1
+
+                if self.st2[self.i] == '+':
+                    num = self.getnum(self.stack[self.top])
+                    if 2 > num or 2 == num:
+                        self.top += 1
+                        self.stack[self.top] = "+2"
+
+                    elif 2 < num:
+                        self.ans[self.topans] = self.stack[self.top]
+                        self.stack[self.top] = "+2"
+                        self.topans += 1
+                elif self.st2[self.i] == '-':
+                    num = self.getnum(self.stack[self.top])
+                    if 1 > num or 1 == num:
+                        self.top += 1
+                        self.stack[self.top] = '-1'
+
+                    elif 1 < num:
+                        self.ans[self.topans] = self.stack[self.top]
+                        self.stack[self.top] = '-1'
+                        self.topans += 1
+                elif self.st2[self.i] == '*':
+                    num = self.getnum(self.stack[self.top])
+                    if 4 > num or 4 == num:
+                        self.top += 1
+                        self.stack[self.top] = '*4'
+
+                    elif 4 < num:
+                        self.ans[self.topans] = self.stack[self.top]
+                        self.stack[self.top] = '*4'
+                        self.topans += 1
+                elif self.st2[self.i] == '/':
+                    num = self.getnum(self.stack[self.top])
+                    if 3 > num or 3 == num:
+                        self.top += 1
+                        self.stack[self.top] = '/3'
+
+                    elif 3 < num:
+                        self.ans[self.topans] = self.stack[self.top]
+                        self.stack[self.top] = '/3'
+                        self.topans += 1
+                elif self.st2[self.i] == '^':
+                    num = self.getnum(self.stack[self.top])
+                    if 5 > num:
+                        self.top += 1
+                        self.stack[self.top] = '^5'
+
+                    elif 5 < num:
+                        self.ans[self.topans] = self.stack[self.top]
+                        self.stack[self.top] = '^5'
+                        self.topans += 1
+            self.i += 1
+
+        sub = self.st2[self.save:self.i]  # lastes number into a sub.
+        self.ans[self.topans] = sub  # and then goto ans(answer) array.
+        return self.top
+
+    def stackintoArr(self):
+        i = 0
+        t = self.gotohome()
+        l = self.lste
+
+        while i < l:
+            if self.ans[i] == '00':
+                self.ans[i] = self.stack[t]
+                t -= 1
+            i += 1
+
+    def isfloat(self, w):  # checking for is float or not.
+        w = str(w)
+        i = 0
+        l = len(w)
+        while i < l:
+            if w[i] == '.':
+                return True
+            i += 1
+
+    def cal(self):  # for calculate number and operator that is that are in array.
+        i = 0
+        l = len(self.ans)
+        top = -1
+
+        while i < l:
+            if self.ans[i].isdigit():
+                top += 1
+
+                self.stack[top] = self.ans[i]
+
+            else:
+                if self.ans[i] == '+2':
+                    if self.isfloat(self.stack[top - 1]) or self.isfloat(self.stack[top]):
+                        self.stack[top - 1] = float(self.stack[top - 1]) + float(self.stack[top])
+                        self.stack[top] = 0
+                        top -= 1
+                    else:
+                        self.stack[top - 1] = int(self.stack[top - 1]) + int(self.stack[top])
+                        self.stack[top] = 0
+                        top -= 1
 
 
-            elif arr[i] == '*4':
-                if isfloat(stack2[top - 1]) or isfloat(stack2[top]):
-                    stack2[top - 1] = float(stack2[top - 1]) * float(stack2[top])
-                    stack2[top] = 0
-                    top -= 1
-                else:
-                    stack2[top - 1] = int(stack2[top - 1]) * int(stack2[top])
-                    stack2[top] = 0
-                    top -= 1
-            elif arr[i] == '-1':
-                if isfloat(stack2[top - 1]) or isfloat(stack2[top]):
-                    stack2[top - 1] = float(stack2[top - 1]) - float(stack2[top])
-                    stack2[top] = 0
-                    top -= 1
-                else:
-                    stack2[top - 1] = int(stack2[top - 1]) - int(stack2[top])
-                    stack2[top] = 0
-                    top -= 1
-            elif arr[i] == '/3':
-                if isfloat(stack2[top - 1]) or isfloat(stack2[top]):
-                    stack2[top - 1] = float(stack2[top - 1]) / float(stack2[top])
-                    stack2[top] = 0
-                    top -= 1
-                else:
-                    stack2[top - 1] = int(stack2[top - 1]) / int(stack2[top])
-                    stack2[top] = 0
-                    top -= 1
-            elif arr[i] == '^5':
-                if isfloat(stack2[top - 1]) or isfloat(stack2[top]):
-                    stack2[top - 1] = math.pow(float(stack2[top - 1]), float(stack2[top]))
-                    stack2[top] = 0
-                    top -= 1
-                else:
-                    stack2[top - 1] = math.pow(int(stack2[top - 1]), int(stack2[top]))
-                    stack2[top] = 0
-                    top -= 1
-        i += 1
-    return stack2[0]
+                elif self.ans[i] == '*4':
+                    if self.isfloat(self.stack[top - 1]) or self.isfloat(self.stack[top]):
+                        self.stack[top - 1] = float(self.stack[top - 1]) * float(self.stack[top])
+                        self.stack[top] = 0
+                        top -= 1
+                    else:
+                        self.stack[top - 1] = int(self.stack[top - 1]) * int(self.stack[top])
+                        self.stack[top] = 0
+                        top -= 1
+                elif self.ans[i] == '-1':
+                    if self.isfloat(self.stack[top - 1]) or self.isfloat(self.stack[top]):
+                        self.stack[top - 1] = float(self.stack[top - 1]) - float(self.stack[top])
+                        self.stack[top] = 0
+                        top -= 1
+                    else:
+                        self.stack[top - 1] = int(self.stack[top - 1]) - int(self.stack[top])
+                        self.stack[top] = 0
+                        top -= 1
+                elif self.ans[i] == '/3':
+                    if self.isfloat(self.stack[top - 1]) or self.isfloat(self.stack[top]):
+                        self.stack[top - 1] = float(self.stack[top - 1]) / float(self.stack[top])
+                        self.stack[top] = 0
+                        top -= 1
+                    else:
+                        self.stack[top - 1] = int(self.stack[top - 1]) / int(self.stack[top])
+                        self.stack[top] = 0
+                        top -= 1
+                elif self.ans[i] == '^5':
+                    if self.isfloat(self.stack[top - 1]) or self.isfloat(self.stack[top]):
+                        self.stack[top - 1] = math.pow(float(self.stack[top - 1]), float(self.stack[top]))
+                        self.stack[top] = 0
+                        top -= 1
+                    else:
+                        self.stack[top - 1] = math.pow(int(self.stack[top - 1]), int(self.stack[top]))
+                        self.stack[top] = 0
+                        top -= 1
+
+            i += 1
+        return self.stack[0]
+
+    def pr(self):
+        self.gotohome()
+        self.stackintoArr()
+        self.cal()
+        return self.stack[0]
 
 
+m = classname('5^5')
+m.pr()
 
 def index(r):
     st2 = r.GET.get('str', False)
     temp = loader.get_template('index.html')
 
     st2 = str(st2)
-    #st2 = "5+2*8/5+7-24"
-    lstr = len(st2)
-
-    ans = [None] * lstr
-    initio(ans)
-    topans = 0
-
-    stack = [None] * 8
-    initio(stack)
-    top = -1
-    stack[top] = "00"
-
-    t = gotohome(stack,ans,st2, topans, top)
-    stackintoArr(ans, stack, t)
-
+    m = classname(st2)
     try:
-        res = cal(ans, stack)
+        res = m.pr()
     except ZeroDivisionError:
         res = "Undefined"
-
-
 
     c = {'res':res, 'a':st2}
     return HttpResponse(temp.render(c,r))
