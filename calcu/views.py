@@ -31,6 +31,11 @@ class strmath():
             str[i] = "00"
             i += 1
 
+    def isempty(se,s):
+        if s == '00':
+            return True
+        else:
+            return False
     def getnum(self, str):  # get number of each operator
         i = 0
         l = len(str)
@@ -42,68 +47,119 @@ class strmath():
             i += 1
 
     def gotohome(self):  # add stack and ans array
+        # print('st2 in stackn in arra func : ', self.st)
         l = self.lste
         while self.i < l:
-
+            print('stack : ', self.stack)
+            print('ans : ', self.ans)
             if not self.st2[self.i].isdigit():
-
                 sub = self.st2[self.save:self.i]  # cut number that is left side of operator.
                 self.save = self.i + 1  # update save to first of right side number of operator.
 
                 self.ans[self.topans] = sub  # the number into ans array.
-
                 self.topans += 1
 
                 if self.st2[self.i] == '+':
-                    num = self.getnum(self.stack[self.top])
-                    if 2 > num or 2 == num:
+
+                    if self.stack[self.top] == '(':
                         self.top += 1
                         self.stack[self.top] = "+2"
+                    else:
+                        num = self.getnum(self.stack[self.top])
+                        if 2 > num or 2 == num:
+                            self.top += 1
+                            self.stack[self.top] = "+2"
 
-                    elif 2 < num:
-                        self.ans[self.topans] = self.stack[self.top]
-                        self.stack[self.top] = "+2"
-                        self.topans += 1
+                        elif 2 < num:
+                            self.ans[self.topans] = self.stack[self.top]
+                            self.stack[self.top] = "+2"
+                            self.topans += 1
+
+
                 elif self.st2[self.i] == '-':
-                    num = self.getnum(self.stack[self.top])
-                    if 1 > num or 1 == num:
-                        self.top += 1
-                        self.stack[self.top] = '-1'
 
-                    elif 1 < num:
-                        self.ans[self.topans] = self.stack[self.top]
-                        self.stack[self.top] = '-1'
-                        self.topans += 1
+                    if self.stack[self.top] == '(':
+                        self.top += 1
+                        self.stack[self.top] = "-1"
+                    else:
+                        num = self.getnum(self.stack[self.top])
+                        if 2 > num or 2 == num:
+                            self.top += 1
+                            self.stack[self.top] = "-1"
+
+                        elif 2 < num:
+                            self.ans[self.topans] = self.stack[self.top]
+                            self.stack[self.top] = "-1"
+                            self.topans += 1
+
+
+
                 elif self.st2[self.i] == '*':
-                    num = self.getnum(self.stack[self.top])
-                    if 4 > num or 4 == num:
-                        self.top += 1
-                        self.stack[self.top] = '*4'
 
-                    elif 4 < num:
-                        self.ans[self.topans] = self.stack[self.top]
-                        self.stack[self.top] = '*4'
-                        self.topans += 1
+                    if self.stack[self.top] == '(':
+                        self.top += 1
+                        self.stack[self.top] = "*4"
+                    else:
+                        num = self.getnum(self.stack[self.top])
+                        if 2 > num or 2 == num:
+                            self.top += 1
+                            self.stack[self.top] = "*4"
+
+                        elif 2 < num:
+                            self.ans[self.topans] = self.stack[self.top]
+                            self.stack[self.top] = "*4"
+                            self.topans += 1
+
+
                 elif self.st2[self.i] == '/':
-                    num = self.getnum(self.stack[self.top])
-                    if 3 > num or 3 == num:
-                        self.top += 1
-                        self.stack[self.top] = '/3'
 
-                    elif 3 < num:
-                        self.ans[self.topans] = self.stack[self.top]
-                        self.stack[self.top] = '/3'
-                        self.topans += 1
+                    if self.stack[self.top] == '(':
+                        self.top += 1
+                        self.stack[self.top] = "/3"
+                    else:
+                        num = self.getnum(self.stack[self.top])
+                        if 2 > num or 2 == num:
+                            self.top += 1
+                            self.stack[self.top] = "/3"
+
+                        elif 2 < num:
+                            self.ans[self.topans] = self.stack[self.top]
+                            self.stack[self.top] = "/3"
+                            self.topans += 1
+
+
                 elif self.st2[self.i] == '^':
-                    num = self.getnum(self.stack[self.top])
-                    if 5 > num:
-                        self.top += 1
-                        self.stack[self.top] = '^5'
 
-                    elif 5 < num:
-                        self.ans[self.topans] = self.stack[self.top]
-                        self.stack[self.top] = '^5'
-                        self.topans += 1
+                    if self.stack[self.top] == '(':
+                        self.top += 1
+                        self.stack[self.top] = "^5"
+                    else:
+                        num = self.getnum(self.stack[self.top])
+                        if 2 > num or 2 == num:
+                            self.top += 1
+                            self.stack[self.top] = "^5"
+
+                        elif 2 < num:
+                            self.ans[self.topans] = self.stack[self.top]
+                            self.stack[self.top] = "^5"
+                            self.topans += 1
+
+                elif self.st2[self.i] == '(':
+
+                    self.top += 1
+                    self.stack[self.top] = '('
+
+                elif self.st2[self.i] == ')':
+
+                    while 1 == 1:
+                        a = self.isempty(self.stack[self.top])
+                        if a == False:
+                            self.ans[self.topans] = self.stack[self.top]
+                            self.top += 1
+                            self.topans += 1
+                        else:
+                            break
+
             self.i += 1
 
         sub = self.st2[self.save:self.i]  # lastes number into a sub.
@@ -197,6 +253,8 @@ class strmath():
         self.gotohome()
         self.stackintoArr()
         self.cal()
+        print('lenght of ans : ',len(self.ans))
+        print('lenght of stack : ', len(self.stack))
         return self.stack[0]
 
 
