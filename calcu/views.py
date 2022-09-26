@@ -47,11 +47,8 @@ class strmath():
             i += 1
 
     def gotohome(self):  # add stack and ans array
-        # print('st2 in stackn in arra func : ', self.st)
         l = self.lste
         while self.i < l:
-            print('stack : ', self.stack)
-            print('ans : ', self.ans)
             if not self.st2[self.i].isdigit():
                 sub = self.st2[self.save:self.i]  # cut number that is left side of operator.
                 self.save = self.i + 1  # update save to first of right side number of operator.
@@ -253,8 +250,6 @@ class strmath():
         self.gotohome()
         self.stackintoArr()
         self.cal()
-        print('lenght of ans : ',len(self.ans))
-        print('lenght of stack : ', len(self.stack))
         return self.stack[0]
 
 
