@@ -253,22 +253,6 @@ class strmath():
         return self.stack[0]
 
 
-
-
-'''def index(r):
-    st2 = r.GET.get('str', False)
-    temp = loader.get_template('index.html')
-
-    st2 = str(st2)
-    m = strmath(st2)
-    try:
-        res = m.pr()
-    except ZeroDivisionError:
-        res = "Undefined"
-
-    c = {'res':res, 'a':st2}
-    return HttpResponse(temp.render(c,r))'''
-
 class index(generic.ListView):
     #template_name = 'index.html'
 
