@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.template import loader
-from django.http import HttpResponse
+from django.http import JsonResponse
 from django.views import generic
 import math
 
@@ -274,6 +274,9 @@ class index(generic.ListView):
 
     def get(self,r):
         st2 = r.GET.get('str', False)
+
+        if st2 == False:
+            st2 = "0"
 
         st2 = str(st2)
         m = strmath(st2)
