@@ -283,7 +283,7 @@ class index(generic.ListView):
         try:
             res = m.pr()
         except ZeroDivisionError:
-            res = "Undefined"
+            res = "ZeroDivisionError"
 
         c = {'res': res, 'a': st2}
         return render(r, 'index.html', c)
