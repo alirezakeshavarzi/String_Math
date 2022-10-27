@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.template import loader
 from django.http import JsonResponse
 from django.views import generic
-import math
+
 
 import math
 
@@ -15,6 +15,7 @@ class strmath():
     stack = [None] * 1
     topans = 0
     top = -1
+
 
     def __init__(self, st2):
         self.st2 = st2
@@ -229,6 +230,7 @@ class strmath():
                         self.stack[top - 1] = float(self.stack[top - 1]) / float(self.stack[top])
                         self.stack[top] = 0
                         top -= 1
+                        #self.solution = "hi"#str(float(self.stack[top - 1])) + " / " + str(float(self.stack[top])) + " = " + str(self.stack[top - 1])
                     else:
                         self.stack[top - 1] = int(self.stack[top - 1]) / int(self.stack[top])
                         self.stack[top] = 0
@@ -250,6 +252,7 @@ class strmath():
         self.gotohome()
         self.stackintoArr()
         self.cal()
+        #self.solution = "222"
         return self.stack[0]
 
 
@@ -262,8 +265,10 @@ class index(generic.ListView):
         if st2 == False:
             st2 = "0"
 
+
         st2 = str(st2)
         m = strmath(st2)
+        #print("///////////////solotion : ////////////  =  ",m.solution)
         try:
             res = m.pr()
         except ZeroDivisionError:
