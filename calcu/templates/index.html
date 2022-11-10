@@ -3,21 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <style>
+
+    body {
+     font-family: Arial;
+     margin: 0;
+    }
+
+    .header {
+      padding: 60px;
+      text-align: center;
+      background: #1abc9c;
+      color: white;
+      font-size: 20px;
+    }
+
+    .content {padding:10px;}
+
+
+    input[type=text] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: none;
+      background-color: #3CBC8D;
+      color: white;
+    }
+
+    .button {
+        transition-duration: 0.4s;
+        width : 200px;
+        height : 50px;
+        font-size: 20px;
+        color : green;
+
+        font-family: Arial;
+    }
+
+.button:hover {
+  background-color: green; /* Green */
+  color: white;
+  border : none;
+}
+
+    </style>
 
 
 
 
 </head>
 <body style="background-color:white">
-    <form action="" method="get" style="text-align:center;padding-top:5%;">
-        <input type="text" name="str"   value="{{a}}" size="80" maxlength="3000" ><br><br>
 
-        <input type="submit"  class="btn btn-primary" value="Calculate">
-    </form>
-    <br><br>
-    <p style="text-align:center;padding-left:0%">result : {{res}}</p>
-    <br>
-    <b style="padding-left:44%; color:darkyellow; ">{{e2}}</b><b style="padding-left:44%; color:darkred; white-space:nowrap;">{{e}}</b>
+    <div class="header">
+    <h1 style="font-size:60px">String Calculator</h1>
+    <p style="font-size:20px">You can enter a string and get your answer</p>
+    </div>
+
+    <div class="content">
+        <form action="" method="get" style="text-align:center;padding-top:5%;">
+            <input type="text" name="str"   value="{{a}}" size="80" maxlength="3000" style="padding-left:0%; font-size:30px; text-align:center"><br><br>
+
+
+            <input type="submit"  class="button" value="Calculate" >
+
+        </form>
+        <br><br>
+        <p style="text-align:center;padding-left:0%">result : {{res}}</p>
+        <br>
+        <b style="padding-left:44%; color:darkyellow; ">{{e2}}</b><b style="padding-left:44%; color:darkred; white-space:nowrap;">{{e}}</b>
+    </div>
 </body>
 </html>
