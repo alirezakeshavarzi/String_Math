@@ -43,7 +43,6 @@ class strmath():
         while i < l:
             if str[i].isdigit():
                 return int(str[i])
-                break
 
             i += 1
 
@@ -257,7 +256,6 @@ class strmath():
 
 
 class index(generic.ListView):
-    #template_name = 'index.html'
 
     def get(self,r):
         st2 = r.GET.get('str', False)
@@ -268,7 +266,6 @@ class index(generic.ListView):
 
         st2 = str(st2)
         m = strmath(st2)
-        #print("///////////////solotion : ////////////  =  ",m.solution)
         try:
             res = m.pr()
         except ZeroDivisionError:
