@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'strmath.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Website_me',
+        'NAME': 'math_website',
         'USER': 'root',
         'PASSWORD': 'admin',
         'HOST': '127.0.0.1',
