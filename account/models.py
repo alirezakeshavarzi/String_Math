@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
-    email_n = models.EmailField(unique=True)
+    email = models.EmailField(unique=True)
     membership_date = models.DateTimeField(auto_now_add=True)
 
     # Avoid conflicts with the default `auth.User` relationships
@@ -23,4 +23,4 @@ class User(AbstractUser):
     )
 
     def __str__(self):
-        return self.email_n
+        return self.email
