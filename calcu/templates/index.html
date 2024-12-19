@@ -6,74 +6,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style>
-
     body {
-     font-family: Arial;
-     margin: 0;
+        font-family: Arial;
+        margin: 0;
     }
 
     .header {
-      padding: 60px;
-      text-align: center;
-      background: #1abc9c;
-      color: white;
-      font-size: 20px;
+        padding: 60px;
+        text-align: center;
+        background: #1abc9c;
+        color: white;
+        font-size: 20px;
+        position: relative;
     }
 
-    .content {padding:10px;}
+    .buttons-container {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
 
+    .auth-button {
+        background-color: white;
+        color: #1abc9c;
+        border: 2px solid #1abc9c;
+        padding: 10px 20px;
+        margin: 5px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .auth-button:hover {
+        background-color: #1abc9c;
+        color: white;
+    }
+
+    .content {
+        padding: 10px;
+    }
 
     input[type=text] {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      box-sizing: border-box;
-      border: none;
-      background-color: #3CBC8D;
-      color: white;
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: none;
+        background-color: #3CBC8D;
+        color: white;
     }
 
     .button {
         transition-duration: 0.4s;
-        width : 200px;
-        height : 50px;
+        width: 200px;
+        height: 50px;
         font-size: 20px;
-        color : green;
-
+        color: green;
         font-family: Arial;
     }
 
-.button:hover {
-  background-color: green; /* Green */
-  color: white;
-  border : none;
-}
-
+    .button:hover {
+        background-color: green; /* Green */
+        color: white;
+        border: none;
+    }
     </style>
-
-
-
-
 </head>
 <body style="background-color:white">
-
     <div class="header">
-    <h1 style="font-size:60px">String Calculator</h1>
-    <p style="font-size:20px">You can enter a string and get your answer</p>
+        <div class="buttons-container">
+            <a href="#" class="auth-button">Sign In</a>
+            <a href="#" class="auth-button">Log In</a>
+        </div>
+        <h1 style="font-size:60px">String Calculator</h1>
+        <p style="font-size:20px">You can enter a string and get your answer</p>
     </div>
 
     <div class="content">
         <form action="" method="get" style="text-align:center;padding-top:5%;">
-            <input type="text" name="str"   value="{{a}}" size="80" maxlength="3000" style="padding-left:0%; font-size:30px; text-align:center"><br><br>
-
-
-            <input type="submit"  class="button" value="Calculate" >
-
+            <input type="text" name="str" value="{{a}}" size="80" maxlength="3000" style="padding-left:0%; font-size:30px; text-align:center"><br><br>
+            <input type="submit" class="button" value="Calculate">
         </form>
         <br><br>
         <p style="text-align:center;padding-left:0%">result : {{res}}</p>
         <br>
-        <b style="padding-left:44%; color:darkyellow; ">{{e2}}</b><b style="padding-left:44%; color:darkred; white-space:nowrap;">{{e}}</b>
+        <b style="padding-left:44%; color:darkyellow;">{{e2}}</b>
+        <b style="padding-left:44%; color:darkred; white-space:nowrap;">{{e}}</b>
     </div>
 </body>
 </html>
