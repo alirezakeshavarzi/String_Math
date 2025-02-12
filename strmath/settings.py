@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'calcu',
+    'account',
+
+    'rest_framework', # add django rest framework library to auth.
 ]
 
 MIDDLEWARE = [
