@@ -5,6 +5,8 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
+
+    username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(unique=True)
     membership_date = models.DateTimeField(auto_now_add=True)
 
