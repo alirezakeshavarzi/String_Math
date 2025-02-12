@@ -274,4 +274,15 @@ class index(generic.ListView):
         c = {'res': res, 'a': st2}
         return render(r, 'index.html', c)
 
+
+from django.contrib.auth import authenticate
+
+def auth_view(request):
+    if request.method == "post":
+        form_type = request.post.get("form_type")
+        email = request.post["email"]
+        password = request.post["password"]
+
+        if form_type == "login":
+
 # Create your views here.
