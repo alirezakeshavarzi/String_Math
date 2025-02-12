@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     # add apps
     'calcu',
 
-    'rest_framework', # add django rest framework library to auth.
+    'rest_framework', # 1.add django rest framework library to auth.
 ]
 
 MIDDLEWARE = [
@@ -131,3 +131,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# 2. add this part ( why? )
+REST_AUTH = {
+    'USE_JWT' : 'True',
+    'JWT_AUTH_COOKIE' : "strmath_cookie",
+    'JWT_AUTH_REFRESH_COOKIE' : "strmath_refresh_cookie"
+}
