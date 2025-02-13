@@ -17,7 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from calcu.views import index
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index/', index.as_view()),
+    path('index/', index.as_view(), name='home'),
 ]
