@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from calcu.views import index
 
+# 3. add views from simple jwt
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -25,4 +26,8 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', index.as_view(), name='home'),
+
+    # 4. add path from simple jwt
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
