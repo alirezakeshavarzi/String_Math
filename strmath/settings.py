@@ -139,3 +139,10 @@ REST_AUTH = {
     'JWT_AUTH_COOKIE' : "strmath_cookie",
     'JWT_AUTH_REFRESH_COOKIE' : "strmath_refresh_cookie"
 }
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASS": (
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
+
+    )
+}
