@@ -134,15 +134,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # 2. add this part ( why? )
-REST_AUTH = {
-    'USE_JWT' : 'True',
-    'JWT_AUTH_COOKIE' : "strmath_cookie",
-    'JWT_AUTH_REFRESH_COOKIE' : "strmath_refresh_cookie"
-}
+# REST_AUTH = {
+#     'USE_JWT' : 'True',
+#     'JWT_AUTH_COOKIE' : "strmath_cookie",
+#     'JWT_AUTH_REFRESH_COOKIE' : "strmath_refresh_cookie"
+# }
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASS": (
-        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
-
-    )
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
 }
