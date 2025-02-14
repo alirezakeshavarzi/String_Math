@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'rest_framework', # 1.add django rest framework library to auth.
 ]
 
+# settings.py
+AUTH_USER_MODEL = 'calcu.User'  # Replace 'calcu' with your app name
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -82,11 +85,11 @@ WSGI_APPLICATION = 'strmath.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'math_website',
+        'NAME': 'String_Math',
         'USER': 'root',
-        'PASSWORD': 'admin',
+        'PASSWORD': 'arsalan29138_mysql',
         'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'PORT': '3307',
     }
 }
 
@@ -140,6 +143,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     'JWT_AUTH_REFRESH_COOKIE' : "strmath_refresh_cookie"
 # }
 
+# 1. install simple jwt authentication
+# 2. add this part of jwt simple auth
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
