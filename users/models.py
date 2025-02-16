@@ -7,7 +7,7 @@ class User(AbstractUser):
     username = models.CharField(max_length=80, unique=True)
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
-    email_n = models.EmailField(unique=True)
+    email = models.EmailField(unique=True)
     membership_date = models.DateTimeField(auto_now_add=True)
 
     groups = models.ManyToManyField(
