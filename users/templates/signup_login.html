@@ -94,6 +94,7 @@
         </div>
 
         <form id="loginForm" method="post" action="{% url 'auth' %}">
+            {% csrf_token %}
             <input type="hidden" name="form_type" value="login">
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
