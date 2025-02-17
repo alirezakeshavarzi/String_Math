@@ -38,12 +38,14 @@
         .tabs button.active {
             border-bottom: 2px solid #007bff;
         }
-        input[type="email"], input[type="password"] {
+        input[type="text"], input[type="email"], input[type="password"] {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
+            font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            box-sizing: border-box;
         }
         button[type="submit"] {
             width: 100%;
@@ -93,19 +95,18 @@
 
         <form id="loginForm" method="post" action="{% url 'auth' %}">
             <input type="hidden" name="form_type" value="login">
-            <input type="username" placeholder="username" required>
-            <input type="password" placeholder="Password" required>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
 
         <form id="signupForm" method="post" action="{% url 'auth' %}" style="display: none;">
             <input type="hidden" name="form_type" value="signup">
-            <input type="email" placeholder="Email Address" required>
-            <input type="password" placeholder="Password" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Signup</button>
         </form>
 
-<!--    log in with google    -->
         <div class="google-login">
             <button type="button">Login with Google</button>
         </div>
