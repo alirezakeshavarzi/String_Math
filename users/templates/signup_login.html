@@ -135,6 +135,36 @@
             signupForm.style.display = 'block';
             loginForm.style.display = 'none';
         });
+
+
+        <script>
+document.getElementById('loginForm').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const username = document.querySelector('input[name="username"]').value;
+    const password = document.querySelector('input[name="password"]').value;
+
+    const response = await fetch('/api/login/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password })
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+        localStorage.setItem('access_token', data.access);
+        localStorage.setItem('refresh_token', data.refresh);
+        alert("Login successful!");
+        window.location.href = "/dashboard/"; // Redirect after login
+    } else {
+        alert(data.error || "Login failed");
+    }
+});
+</script>
+
     </script>
 </body>
 </html>
