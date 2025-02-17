@@ -40,12 +40,14 @@ INSTALLED_APPS = [
 
     # add apps
     'calcu',
+    'users',
 
     'rest_framework', # 1.add django rest framework library to auth.
+    'rest_framework_simplejwt',
 ]
 
 # settings.py
-AUTH_USER_MODEL = 'calcu.User'  # Replace 'calcu' with your app name
+#AUTH_USER_MODEL = 'calcu.User'  # Replace 'calcu' with your app name
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
