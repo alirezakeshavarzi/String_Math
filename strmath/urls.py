@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+
 from calcu.views import index
+from users.views import signup_login
 
 # 3. add views from simple jwt
 from rest_framework_simplejwt.views import (
@@ -26,6 +28,8 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', index.as_view(), name='home'),
+
+    path('authuser/',signup_login , name='auth'),
 
     # 4. add path from simple jwt
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
