@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 
 
 
@@ -29,6 +29,9 @@ def auth_view(request):
                 return render(request, 'signup_login.html', {'error': 'Invalid credentials'})
         return render("index.html")
 
+
+def signup_login(req):
+    return render(req,'signup_login.html')
 
 # Create your views here.
 
