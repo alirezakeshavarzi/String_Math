@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from calcu.views import index
-from users.views import signup_login
+from users.views import login_View
 
 # 3. add views from simple jwt
 from rest_framework_simplejwt.views import (
@@ -29,7 +29,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', index.as_view(), name='home'),
 
-    path('authuser/',signup_login , name='auth'),
+    path('authuser/',login_View , name='auth'),
+
+    #path('api/login', login_view, name='login'),
 
     # 4. add path from simple jwt
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
