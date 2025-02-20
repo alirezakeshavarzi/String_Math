@@ -29,7 +29,11 @@ def login_view(request):
                 request.session['access_token'] = str(refresh.access_token)
                 request.session['refresh_token'] = str(refresh)
 
-                return render(request, 'index.html', {"msg" : "welcome"})
+                # msg
+                request.session['username'] = username
+                request.session['msg'] = "welcomn"
+
+                return redirect('/index/', {"msg" : "welcome", "username" : username})
 
 
 def protected_view(request):
