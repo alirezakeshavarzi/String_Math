@@ -31,9 +31,9 @@ def login_view(request):
 
                 # msg
                 request.session['username'] = username
-                request.session['msg'] = "welcomn"
+                request.session['msg'] = "welcome"
 
-                return redirect('/index/', {"msg" : "welcome", "username" : username})
+                return redirect('/index/')
 
 
 def protected_view(request):
