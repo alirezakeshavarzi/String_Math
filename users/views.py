@@ -53,8 +53,10 @@ def login_view(request):
 
 #
 def protected_view(request):
+    # Get access_token ( that we save in session in login_view function) from session with name access_token.
     access_token = request.session.get('access_token')
 
+    # If the token had been invalidated go to auth page.
     if not access_token:
         return redirect('auth')
 
