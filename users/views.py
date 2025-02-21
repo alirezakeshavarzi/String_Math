@@ -10,32 +10,48 @@ def login_signup(reqeust):
 
 def login_view(request):
     if request.method == 'POST':
+
+        # sending request.POST data into form
         form = LoginForms(request.POST)
 
         if form.is_valid():
+
+            # get username and password
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
 
+            # authenticate user into that  exist in the database.
             user = authenticate(request, username=username, password=password)
             print("This is user ///////////////////////// /////////// : ", user)
 
             if user:
+
+                ### An example
+                ## 1. authenticate checks whether "ali" and "1234" are valid.
+                ## 2. If true, login will cause request.user.username to be equal to "ali" in the application from now on, and the user will be recognized as logged in.
+
+                # It actually logs the user into the system and activates the session for them.
                 login(request, user)
 
                 refresh = RefreshToken.for_user(user)
                 print("refresh //////////////////// : /////////// ", refresh)
 
 
+                # Save access token in access_token session name
                 request.session['access_token'] = str(refresh.access_token)
+
+                # Save refresh token in refresh_token session name
                 request.session['refresh_token'] = str(refresh)
 
-                # msg
+                # Save relevant messages in the session for use in a html file
+                # because with redirect we can't send message ( into html file )
                 request.session['username'] = username
                 request.session['msg'] = "welcome"
 
                 return redirect('/index/')
 
 
+#
 def protected_view(request):
     access_token = request.session.get('access_token')
 
