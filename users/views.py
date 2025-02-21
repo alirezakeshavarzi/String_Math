@@ -24,7 +24,6 @@ def login_view(request):
 
             # authenticate user into that  exist in the database.
             user = authenticate(request, username=username, password=password)
-            print("This is user ///////////////////////// /////////// : ", user)
 
             if user:
 
@@ -36,7 +35,6 @@ def login_view(request):
                 login(request, user)
 
                 refresh = RefreshToken.for_user(user)
-                print("refresh //////////////////// : /////////// ", refresh)
 
 
                 # Save access token in access_token session name
