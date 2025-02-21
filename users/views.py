@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import LoginForms
+from .forms import LoginForms, SignupForms
 from django.contrib.auth import authenticate, login, logout
 
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -67,4 +67,15 @@ def logout_view(request):
     return redirect('/')
 
 def signup_view(request):
-    ...
+    if request.method == 'POST':
+        form = SignupForms(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = SignupForms()
+
+    return render(request,'index.html',{'form':form})
+
+
