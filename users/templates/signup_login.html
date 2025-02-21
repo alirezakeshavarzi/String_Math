@@ -122,6 +122,7 @@
         const loginForm = document.getElementById('loginForm');
         const signupForm = document.getElementById('signupForm');
 
+        // Switch to login form when "Login" tab is clicked
         loginTab.addEventListener('click', () => {
             loginTab.classList.add('active');
             signupTab.classList.remove('active');
@@ -129,6 +130,7 @@
             signupForm.style.display = 'none';
         });
 
+        // Switch to signup form when "Signup" tab is clicked
         signupTab.addEventListener('click', () => {
             signupTab.classList.add('active');
             loginTab.classList.remove('active');
@@ -136,35 +138,34 @@
             loginForm.style.display = 'none';
         });
 
+        // Handle login form submission via AJAX
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent default form submission
 
-        <script>
-document.getElementById('loginForm').addEventListener('submit', async function(event) {
-    event.preventDefault(); // Prevent default form submission
+            const username = document.querySelector('input[name="username"]').value;
+            const password = document.querySelector('input[name="password"]').value;
 
-    const username = document.querySelector('input[name="username"]').value;
-    const password = document.querySelector('input[name="password"]').value;
+            const response = await fetch('/api/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password })
+            });
 
-    const response = await fetch('/api/login/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password })
-    });
+            const data = await response.json();
 
-    const data = await response.json();
-
-    if (response.ok) {
-        localStorage.setItem('access_token', data.access);
-        localStorage.setItem('refresh_token', data.refresh);
-        alert("Login successful!");
-        window.location.href = "/dashboard/"; // Redirect after login
-    } else {
-        alert(data.error || "Login failed");
-    }
-});
-</script>
-
+            if (response.ok) {
+                localStorage.setItem('access_token', data.access);
+                localStorage.setItem('refresh_token', data.refresh);
+                alert("Login successful!");
+                window.location.href = "/dashboard/"; // Redirect after login
+            } else {
+                alert(data.error || "Login failed");
+            }
+        });
     </script>
+
+
 </body>
 </html>
