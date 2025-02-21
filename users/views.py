@@ -50,7 +50,7 @@ def login_view(request):
                 request.session['username'] = username
                 request.session['msg'] = "welcome"
 
-                return redirect('/index/')
+                return redirect('/')
 
 
 #
@@ -65,8 +65,7 @@ def protected_view(request):
     return render(request, 'index.html', {"msg" : "welcome"})
 
 def logout_view(request):
-    login(request)
-
+    logout(request)
     return redirect('/')
 
 def signup_view(request):
