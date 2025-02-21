@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from .forms import LoginForms
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 from rest_framework_simplejwt.tokens import RefreshToken
+
+
 
 def login_signup(reqeust):
     return render(reqeust, "signup_login.html")
@@ -61,3 +63,11 @@ def protected_view(request):
         return redirect('auth')
 
     return render(request, 'index.html', {"msg" : "welcome"})
+
+def logout_view(request):
+    login(request)
+
+    return redirect('/')
+
+def signup_view(request):
+    ...
