@@ -108,7 +108,7 @@
         <div class="buttons-container">
             {% if request.session.username %}
                 <div class="dropdown">
-                    <button class="auth-button">{{ request.session.username }}</button>
+                    <button class="auth-button" onclick="window.location.href='{% url 'userpanel' %}/'">{{ request.session.username }}</button>
                     <div class="dropdown-content">
                         <a href="{% url 'logout' %}">Logout</a>
                     </div>
