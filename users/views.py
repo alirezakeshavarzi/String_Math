@@ -109,7 +109,7 @@ def update_personal_info(request):
 def update_password(request):
     if request.method == 'POST':
 
-        form = UpdatePassword(request.POST, instance=request.user)
+        form = UpdatePassword(user=request.user, data=request.POST)
 
         if form.is_valid():
             form.save()
@@ -118,7 +118,7 @@ def update_password(request):
 
             return render(request, "user_panel.html", {"msg_p" : "Your information was successfully registered."})
         else:
-            form = UpdatePassword(instance=request.user)
+            form = UpdatePassword(user=request.user)
             return render(request, 'user_panel.html', {'form': form})
 
 
