@@ -92,13 +92,13 @@
 
             <button type="submit" class="save-btn">Save Changes</button>
         </form>
-        <h3>{{msg_p}}</h3>
+        <h3>{{msg_p1}}</h3>
         <h3>{{form.asp}}</h3>
     </div>
 
     <div class="container">
         <h2>Change Password</h2>
-        <form action="/change_password" method="post">
+        <form action="{% url 'updatepass' %}" method="post">
             {% csrf_token %}
             <label for="current-password">Current Password</label>
             <input type="password" id="current-password" name="old_password" required>
@@ -111,8 +111,8 @@
 
             <button type="submit" class="save-btn">Update Password</button>
         </form>
-        <h3>{{msg_p}}</h3>
-        <h3>{{form.asp}}</h3>
+        <h3>{{msg_p2}}</h3>
+        <h3>{{form}}</h3>
     </div>
 
     <div class="container">
