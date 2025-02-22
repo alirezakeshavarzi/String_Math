@@ -70,12 +70,22 @@ def signup_view(request):
     if request.method == 'POST':
         form = SignupForms(request.POST)
 
+        print("password form : ")
+        print('form : ////////////////////// : ')
+
+        print('form is valid : /////////////////// : ', form.is_valid())
         if form.is_valid():
             form.save()
             return redirect('/')
+        else:
+            print("errors from forms : ///////////////////// : ", form.errors)
     else:
         form = SignupForms()
 
-    return render(request,'index.html',{'form':form})
+    return render(request,'signup_login.html',{'form':form})
 
+
+
+def user_panel(request):
+    return render(request, "user_panel.html")
 
