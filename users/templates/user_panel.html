@@ -101,13 +101,13 @@
         <form action="/change_password" method="post">
             {% csrf_token %}
             <label for="current-password">Current Password</label>
-            <input type="password" id="current-password" name="current_password" required>
+            <input type="password" id="current-password" name="old_password" required>
 
             <label for="new-password">New Password</label>
-            <input type="password" id="new-password" name="new_password" required>
+            <input type="password" id="new-password" name="new_password1" required>
 
             <label for="confirm-password">Confirm New Password</label>
-            <input type="password" id="confirm-password" name="confirm_password" required>
+            <input type="password" id="confirm-password" name="new_password2" required>
 
             <button type="submit" class="save-btn">Update Password</button>
         </form>
