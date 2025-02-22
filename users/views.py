@@ -99,11 +99,11 @@ def update_personal_info(request):
         if form.is_valid():
             form.save()
 
-            return render(request, "user_panel.html", {"msg_p" : "Your information was successfully registered."})
+            return render(request, "user_panel.html", {"msg_p1" : "Your information was successfully registered."})
         else:
             form = UpdatePersonalInfoForms(instance=request.user)
 
-        return render(request, 'user_panel.html', {'form': form})
+        return render(request, 'user_panel.html', {'form_info': form})
 
 
 def update_password(request):
@@ -116,10 +116,10 @@ def update_password(request):
 
             update_session_auth_hash(request, request.user)
 
-            return render(request, "user_panel.html", {"msg_p" : "Your information was successfully registered."})
+            return render(request, "user_panel.html", {"msg_p2" : "Your information was successfully registered."})
         else:
             form = UpdatePassword(user=request.user)
-            return render(request, 'user_panel.html', {'form': form})
+            return render(request, 'user_panel.html', {'form_pass': form})
 
 
 
