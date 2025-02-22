@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from calcu.views import index
-from users.views import login_view, login_signup
+from users.views import login_view, login_signup, logout_view, signup_view, user_panel
 
 # 3. add views from simple jwt
 from rest_framework_simplejwt.views import (
@@ -31,6 +31,11 @@ urlpatterns = [
 
     path('authuser/',login_signup , name='auth'),
     path('authuser/login/',login_view , name='login'),
+    path('logout/', logout_view, name='logout'),
+
+    path('authuser/signup/', signup_view, name='signup'),
+
+    path('userpanel/', user_panel, name='userpanel'),
 
 
     # 4. add path from simple jwt
