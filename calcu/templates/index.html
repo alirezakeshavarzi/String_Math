@@ -106,12 +106,18 @@
 <body style="background-color:white">
     <div class="header">
         <div class="buttons-container">
-            <div class="dropdown">
-                <button class="dropdown-btn">{{request.session.username}}</button>
-                <div class="dropdown-content">
-                    <a href="{% url 'logout' %}">Logout</a>
+            {% if request.session.username %}
+                <div class="dropdown">
+                    <button class="auth-button">{{ request.session.username }}</button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </div>
                 </div>
-            </div>
+            {% else %}
+                <div class="auth-button">
+                    <a href="/authuser/" class="auth-button">Login / signup</a>
+                </div>
+            {% endif %}
         </div>
         <h1 style="font-size:60px">String Calculator</h1>
         <p style="font-size:20px">You can enter a string and get your answer</p>
