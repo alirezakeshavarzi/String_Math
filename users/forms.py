@@ -23,6 +23,10 @@ class UpdatePersonalInfoForms(UserChangeForm):
         fields = ['first_name', 'last_name', 'email']
 
 class UpdatePassword(PasswordChangeForm):
+    old_password = forms.CharField(label="Current Password")
+    new_password1 = forms.CharField(label="New Password")
+    new_password2 = forms.CharField(label="Confirm New Password")
+
     class meta:
         model = User
         fields = ['password']
