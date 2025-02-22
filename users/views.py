@@ -103,7 +103,7 @@ def update_personal_info(request):
         else:
             form = UpdatePersonalInfoForms(instance=request.user)
 
-        return render(request, 'user_panel.html', {'form_info': form})
+        return render(request, 'user_panel.html', {'form_info': form.errors})
 
 
 def update_password(request):
@@ -119,7 +119,7 @@ def update_password(request):
             return render(request, "user_panel.html", {"msg_p2" : "Your information was successfully registered."})
         else:
             form = UpdatePassword(user=request.user)
-            return render(request, 'user_panel.html', {'form_pass': form})
+            return render(request, 'user_panel.html', {'form_pass': form.errors})
 
 
 
