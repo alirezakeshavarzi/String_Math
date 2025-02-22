@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .forms import LoginForms, SignupForms ,UpdatePersonalInfoForms
+from .forms import LoginForms, SignupForms ,UpdatePersonalInfoForms, UpdatePassword
 
 
 
@@ -103,7 +103,24 @@ def update_personal_info(request):
         else:
             form = UpdatePersonalInfoForms(instance=request.user)
 
-        return render(request, 'update_profile.html', {'form': form})
+        return render(request, 'user_panel.html', {'form': form})
+
+
+def update_password(request):
+    if request.method == 'POST':
+
+        form = UpdatePassword(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+
+            update_session_auth_hash(request, request.user)
+
+            return render(request, "user_panel.html", {"msg_p" : "Your information was successfully registered."})
+        else:
+            form = UpdatePassword(instance=request.user)
+            return render(request, 'user_panel.html', {'form': form})
+
 
 
 
