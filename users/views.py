@@ -89,3 +89,7 @@ def signup_view(request):
 def user_panel(request):
     return render(request, "user_panel.html")
 
+
+def update_info(request):
+
+
