@@ -182,6 +182,7 @@
             <input type="email" id="forgotEmail" placeholder="Email Address" required>
             <a href="{% url 'emailcheck' %}">
                 <button>Send Reset Link</button>
+                {{em_not}}
             </a>
             <p id="resetMessage"></p>
         </div>
