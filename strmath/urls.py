@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 
 from calcu.views import index
-from users.views import login_view, login_signup, logout_view, signup_view, user_panel, update_personal_info, update_password
+from users.views import login_view, login_signup, logout_view, signup_view, user_panel, update_personal_info, update_password, emailcheck
 
 # 3. add views from simple jwt
 from rest_framework_simplejwt.views import (
@@ -27,6 +27,8 @@ urlpatterns = [
     path('userpanel/', user_panel, name='userpanel'),
 
     path('update_password/', update_password, name='updatepass'),
+
+    path("emailcheck/", emailcheck, name='emailcheck'),
 
 
     # Forget Password

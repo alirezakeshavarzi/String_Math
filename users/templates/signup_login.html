@@ -173,14 +173,16 @@
 
     <button onclick="openModal()">Forgot Password?</button>
 
-    <!-- مودال فراموشی رمز عبور -->
+
     <div id="forgotPasswordModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>Forgot Password?</h2>
             <p>Please enter your email address.</p>
             <input type="email" id="forgotEmail" placeholder="Email Address" required>
-            <button onclick="sendResetRequest()">Send Reset Link</button>
+            <a href="{% url 'emailcheck' %}">
+                <button>Send Reset Link</button>
+            </a>
             <p id="resetMessage"></p>
         </div>
     </div>
@@ -214,6 +216,7 @@
         function closeModal() {
             document.getElementById('forgotPasswordModal').style.display = 'none';
         }
+
 
     </script>
 
