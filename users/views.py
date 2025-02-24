@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .forms import LoginForms, SignupForms ,UpdatePersonalInfoForms, UpdatePassword
+from .models import User
 
 
 
@@ -119,6 +120,15 @@ def update_password(request):
         else:
             return render(request, 'user_panel.html', {'form_pass': form.errors})
 
+def emailcheck(request):
+    email_inp = request.POST.get('forgotEmail')
+
+    user_exists = User.objects.filter(email=email_inp).exists()
+
+    if user_exists:
+        return render(request, "signup_login.html", {"em_not" : "Please check your email"})
+    else:
+        return render(request, "signup_login.html", {"em_not" : "User not found!"})
 
 
 
