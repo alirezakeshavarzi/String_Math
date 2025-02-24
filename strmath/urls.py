@@ -28,9 +28,11 @@ urlpatterns = [
 
     path('update_password/', update_password, name='updatepass'),
 
+    # if email address from user does exists then return page email else not found.
     path("emailcheck/", emailcheck, name='emailcheck'),
 
-    path("rest_password/", rest_pass_view, name='restpass'),
+    # rest password page returned.
+    path("rest_password/<str:token>/", rest_pass_view, name='restpass'),
 
 
     # 4. add path from simple jwt
