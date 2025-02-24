@@ -169,24 +169,25 @@
             <a href="#">Forgot password?</a>
         </div>
     </div>
+    {{em_not}}
 
 
     <button onclick="openModal()">Forgot Password?</button>
 
 
     <div id="forgotPasswordModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Forgot Password?</h2>
-            <p>Please enter your email address.</p>
-            <input type="email" id="forgotEmail" placeholder="Email Address" required>
-            <a href="{% url 'emailcheck' %}">
-                <button>Send Reset Link</button>
-                {{em_not}}
-            </a>
-            <p id="resetMessage"></p>
-        </div>
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">×</span>
+        <h2>Forgot Password?</h2>
+        <p>Please enter your email address.</p>
+        <form method="POST" action="{% url 'emailcheck' %}">
+            {% csrf_token %}
+            <input type="email" name="forgotEmail" placeholder="Email Address" required>
+            <button type="submit">Send Reset Link</button>
+        </form>
+        <p id="resetMessage"></p>
     </div>
+</div>
 
     <script>
         const loginTab = document.getElementById('loginTab');
