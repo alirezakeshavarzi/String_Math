@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.utils.crypto import get_random_string
 
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -126,10 +127,17 @@ def emailcheck(request):
     user_exists = User.objects.filter(email=email_inp).exists()
 
     if user_exists:
+        # email send function...
+        tokenn = get_random_string(length=32)
+
+        request.session['tokenn'] = tokenn
         return render(request, "signup_login.html", {"em_not" : "Please check your email"})
     else:
         return render(request, "signup_login.html", {"em_not" : "User not found!"})
 
+
+def rest_pass_view(request):
+    return render(request, 'rest_password.html')
 
 
 
