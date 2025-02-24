@@ -93,7 +93,7 @@
             <button id="signupTab">Signup</button>
         </div>
 
-        <form id="loginForm" method="post" action="login/">
+        <form id="loginForm" method="post" action="{% url 'login' %}">
             {% csrf_token %}
             <input type="hidden" name="form_type" value="login">
             <input type="text" name="username" placeholder="Username" required>
@@ -101,20 +101,37 @@
             <button type="submit">Login</button>
         </form>
 
-        <form id="signupForm" method="post" action="{% url 'auth' %}" style="display: none;">
+        <form id="signupForm" method="post" action="{% url 'signup' %}" style="display: none;">
+            {% csrf_token %}
             <input type="hidden" name="form_type" value="signup">
             <input type="text" name="username" placeholder="Username" required>
             <input type="email" name="email" placeholder="Email Address" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <input type="password" name="confirm password" placeholder="Confirm Password" required>
+            <input type="password" name="password1" placeholder="Password" required>
+            <input type="password" name="password2" placeholder="Confirm Password" required>
             <button type="submit">Signup</button>
         </form>
+        <h6>{{form}}</h6>
 
         <div class="google-login">
             <button type="button">Login with Google</button>
         </div>
         <div class="forgot-password">
             <a href="#">Forgot password?</a>
+        </div>
+    </div>
+
+
+    <button onclick="openModal()">Forgot Password?</button>
+
+    <!-- مودال فراموشی رمز عبور -->
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Forgot Password?</h2>
+            <p>Please enter your email address.</p>
+            <input type="email" id="forgotEmail" placeholder="Email Address" required>
+            <button onclick="sendResetRequest()">Send Reset Link</button>
+            <p id="resetMessage"></p>
         </div>
     </div>
 
