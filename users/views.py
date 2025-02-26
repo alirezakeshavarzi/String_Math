@@ -19,6 +19,7 @@ def login_signup(reqeust):
 
 
 def login_view(request):
+
     if request.method == 'POST':
 
         # sending request.POST data into form
@@ -57,6 +58,8 @@ def login_view(request):
                 request.session['msg'] = "welcome"
 
                 return redirect('/')
+            else:
+                return render(request, 'signup_login.html', {"msg_error" : "username or password is wrong!"})
 
 
 #
