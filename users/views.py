@@ -190,7 +190,7 @@ def rest_pass_view(request, token):
 def delete_account(request):
 
     if request.method == 'POST':
-        user = authenticate(request, username=request.session['username'])
+        user = User.objects.filter(username=request.session['username'])
 
         if user:
             user.delete()
@@ -201,6 +201,7 @@ def delete_account(request):
 
     else:
         return render(request, 'user_panel.html', {"error": "we have problem"})
+
 
 
 
