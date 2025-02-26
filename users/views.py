@@ -4,6 +4,8 @@ from django.utils.crypto import get_random_string
 from django.core.mail import send_mail
 from django.urls import reverse
 from django.conf import settings
+from django.contrib.auth.forms import SetPasswordForm
+
 
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -145,6 +147,8 @@ def emailcheck(request):
         email_form = settings.EMAIL_HOST_USER
         recipient_list = [email_inp]
 
+        request.session['email_user'] = email_inp
+
         send_mail(subject, message, email_form, recipient_list, fail_silently=False)
 
 
@@ -155,7 +159,39 @@ def emailcheck(request):
 
 
 def rest_pass_view(request, token):
-    return render(request, 'rest_password.html', {'token':token})
+    session_token = request.session.get('token')
+
+    if request.method == 'GET':  # for GET request
+        return render(request, 'rest_password.html', {'token': token})
+    elif request.method == 'POST':
+        print("TOKEN : /////////////////////////////// :  ", token)
+        print("session_token : /////////////////////////////// :  ", session_token)
+        print("session_token : /////////////////////////////// :  ", (session_token==token))
+
+        if session_token == token:
+            try:
+                user_email = request.session.get('email_user')
+                user = User.objects.get(email=user_email)
+
+                print("User_email : /////////////////////////////// :  ", user_email)
+                print("User : /////////////////////////////// :  ", user)
+
+                form = SetPasswordForm(user, request.POST)
+                if form.is_valid():
+                    form.save()
+                    # پاک کردن سشن بعد از موفقیت
+                    del request.session['token']
+                    del request.session['email_user']
+                    return redirect('home')  # یا صفحه دیگه‌ای که می‌خوای
+                else:
+                    return render(request, 'rest_password.html', {'form': form.errors, 'token': token})
+            except User.DoesNotExist:
+                return render(request, 'rest_password.html', {'em_not': 'User not found!', 'token':token})
+        else:
+            return render(request, 'signup_login.html', {'em_not': 'Invalid or expired link!', 'token':token})
+
+
+
 
 
 
