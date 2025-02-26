@@ -154,8 +154,8 @@ def emailcheck(request):
         return render(request, "signup_login.html", {"em_not" : "User not found!"})
 
 
-def rest_pass_view(request):
-    return render(request, 'rest_password.html')
+def rest_pass_view(request, token):
+    return render(request, 'rest_password.html', {'token':token})
 
 
 
