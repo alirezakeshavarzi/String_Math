@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import path, include
 
 from calcu.views import index
-from users.views import login_view, login_signup, logout_view, signup_view, update_personal_info, update_password, emailcheck, rest_pass_view
+from users.views import login_view, login_signup, logout_view, signup_view, update_personal_info, update_password, emailcheck, rest_pass_view, delete_account
 
 # 3. add views from simple jwt
 from rest_framework_simplejwt.views import (
@@ -34,11 +34,13 @@ urlpatterns = [
     # rest password page returned.
     path("rest_password/<str:token>/", rest_pass_view, name='restpass'),
 
+    path("delete", delete_account, name="delete"),
+
 
     # 4. add path from simple jwt
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
 
-    path('accounts/', include('allauth.urls')),  # برای مدیریت احراز هویت اجتماعی
+    #path('accounts/', include('allauth.urls')),  # برای مدیریت احراز هویت اجتماعی
 ]
