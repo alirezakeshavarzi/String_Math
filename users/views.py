@@ -141,7 +141,7 @@ def emailcheck(request):
             reverse('restpass', kwargs={'token': token})
         )
         subject = "Request to change password"
-        message = "Hello, please click this link to change your password"
+        message = f"Hello, please click this link to change your password: {reset_link}"
         email_form = settings.EMAIL_HOST_USER
         recipient_list = [email_inp]
 
