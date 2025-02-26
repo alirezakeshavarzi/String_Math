@@ -187,7 +187,20 @@ def rest_pass_view(request, token):
             return render(request, 'signup_login.html', {'em_not': 'Invalid or expired link!', 'token':token})
 
 
+def delete_account(request):
 
+    if request.method == 'POST':
+        user = authenticate(request, username=request.session['username'])
+
+        if user:
+            user.delete()
+            logout(request)
+            return redirect('home')
+        else:
+            return render(request, 'user_panel.html', {"error" : "we have problem"})
+
+    else:
+        return render(request, 'user_panel.html', {"error": "we have problem"})
 
 
 
