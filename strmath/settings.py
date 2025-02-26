@@ -44,6 +44,12 @@ INSTALLED_APPS = [
 
     'rest_framework', # 1.add django rest framework library to auth.
     'rest_framework_simplejwt',
+
+    # django allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 # settings.py
