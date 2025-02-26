@@ -126,10 +126,10 @@ def update_password(request):
 
 def emailcheck(request):
     email_inp = request.POST.get('forgotEmail')
-    print('email_inp //////////////////////// : ', email_inp)
+    #print('email_inp //////////////////////// : ', email_inp)
 
     user_exists = User.objects.filter(email=email_inp).exists()
-    print('user_exists //////////////////////// : ', user_exists)
+    #print('user_exists //////////////////////// : ', user_exists)
 
     if user_exists:
         # email send function...
@@ -138,7 +138,7 @@ def emailcheck(request):
         request.session['token'] = token
 
         reset_link = request.build_absolute_uri(
-            reverse('rest_password/', kwargs={'token': token})
+            reverse('restpass', kwargs={'token': token})
         )
         subject = "Request to change password"
         message = "Hello, please click this link to change your password"
