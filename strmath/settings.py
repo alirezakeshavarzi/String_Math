@@ -171,3 +171,11 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'strrmath@gmail.com'
 EMAIL_HOST_PASSWORD = 'tsov czmi nusk lujx'
 DEFAULT_FROM_EMAIL = '<strrmath@gmail.com> پشتیبانی'
+
+# add for allauth packege
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # برای احراز هویت محلی
+    'allauth.account.auth_backends.AuthenticationBackend',  # برای احراز هویت اجتماعی
+]
