@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.utils.crypto import get_random_string
+from django.core.mail import send_mail
+from django.urls import reverse
+from django.conf import settings
 
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -123,14 +126,29 @@ def update_password(request):
 
 def emailcheck(request):
     email_inp = request.POST.get('forgotEmail')
+    print('email_inp //////////////////////// : ', email_inp)
 
     user_exists = User.objects.filter(email=email_inp).exists()
+    print('user_exists //////////////////////// : ', user_exists)
 
     if user_exists:
         # email send function...
-        tokenn = get_random_string(length=32)
+        token = get_random_string(length=32)
 
-        request.session['tokenn'] = tokenn
+        request.session['token'] = token
+
+        reset_link = request.build_absolute_uri(
+            reverse('rest_password/', kwargs={'token': token})
+        )
+        subject = "Request to change password"
+        message = "Hello, please click this link to change your password"
+        email_form = settings.EMAIL_HOST_USER
+        recipient_list = [email_inp]
+
+        send_mail(subject, message, email_form, recipient_list, fail_silently=False)
+
+
+        # not complete yet...
         return render(request, "signup_login.html", {"em_not" : "Please check your email"})
     else:
         return render(request, "signup_login.html", {"em_not" : "User not found!"})
