@@ -1,1 +1,1 @@
-# Calculating mathmatics string website
+# String Calculator
