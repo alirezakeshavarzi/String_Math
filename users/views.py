@@ -94,11 +94,10 @@ def signup_view(request):
 
 
 
-def user_panel(request):
-    return render(request, "user_panel.html")
-
 
 def update_personal_info(request):
+    if request.method == 'GET':
+        return render(request, "user_panel.html")
     if request.method == 'POST':
 
         form = UpdatePersonalInfoForms(request.POST, instance=request.user)
@@ -164,25 +163,19 @@ def rest_pass_view(request, token):
     if request.method == 'GET':  # for GET request
         return render(request, 'rest_password.html', {'token': token})
     elif request.method == 'POST':
-        print("TOKEN : /////////////////////////////// :  ", token)
-        print("session_token : /////////////////////////////// :  ", session_token)
-        print("session_token : /////////////////////////////// :  ", (session_token==token))
 
         if session_token == token:
             try:
                 user_email = request.session.get('email_user')
                 user = User.objects.get(email=user_email)
 
-                print("User_email : /////////////////////////////// :  ", user_email)
-                print("User : /////////////////////////////// :  ", user)
 
                 form = SetPasswordForm(user, request.POST)
                 if form.is_valid():
                     form.save()
-                    # پاک کردن سشن بعد از موفقیت
                     del request.session['token']
                     del request.session['email_user']
-                    return redirect('home')  # یا صفحه دیگه‌ای که می‌خوای
+                    return redirect('home')
                 else:
                     return render(request, 'rest_password.html', {'form': form.errors, 'token': token})
             except User.DoesNotExist:
