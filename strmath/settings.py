@@ -46,10 +46,10 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
 
     # django allauth
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
 ]
 
 # settings.py
@@ -106,18 +106,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    # },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    # },
 ]
 
 
@@ -173,9 +173,28 @@ EMAIL_HOST_PASSWORD = 'tsov czmi nusk lujx'
 DEFAULT_FROM_EMAIL = '<strrmath@gmail.com> پشتیبانی'
 
 # add for allauth packege
-SITE_ID = 1
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',  # برای احراز هویت محلی
-    'allauth.account.auth_backends.AuthenticationBackend',  # برای احراز هویت اجتماعی
-]
+# SITE_ID = 1
+#
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',  # برای احراز هویت محلی
+#     'allauth.account.auth_backends.AuthenticationBackend',  # برای احراز هویت اجتماعی (FOR Example sign in with social accounts
+# ]
+#
+# # set settings for google allauth - Oauth 2
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'SCOPE': [
+#             'profile',
+#             'email',
+#         ],
+#         'AUTH_PARAMS': {
+#             'access_type': 'online',
+#         },
+#         'OAUTH_PKCE_ENABLED': True,
+#     }
+# }
+#
+#
+# LOGIN_REDIRECT_URL = '/'  # کجا برود بعد از ورود موفق
+# LOGOUT_REDIRECT_URL = '/'  # کجا برود بعد از خروج
+# SOCIALACCOUNT_LOGIN_ON_GET = True  # برای ورود مستقیم با کلیک روی دکمه

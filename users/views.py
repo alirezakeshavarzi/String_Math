@@ -55,7 +55,7 @@ def login_view(request):
                 # Save relevant messages in the session for use in a html file
                 # because with redirect we can't send message ( into html file )
                 request.session['username'] = username
-                request.session['msg'] = "welcome"
+                #request.session['msg'] = "welcome"
 
                 return redirect('/')
             else:
@@ -71,7 +71,7 @@ def protected_view(request):
     if not access_token:
         return redirect('auth')
 
-    return render(request, 'index.html', {"msg" : "welcome"})
+    return render(request, 'index.html', {"msg" : ""})
 
 def logout_view(request):
     logout(request)
@@ -81,15 +81,9 @@ def signup_view(request):
     if request.method == 'POST':
         form = SignupForms(request.POST)
 
-        print("password form : ")
-        print('form : ////////////////////// : ')
-
-        print('form is valid : /////////////////// : ', form.is_valid())
         if form.is_valid():
             form.save()
             return redirect('/')
-        else:
-            print("errors from forms : ///////////////////// : ", form.errors)
     else:
         form = SignupForms()
 
@@ -130,10 +124,8 @@ def update_password(request):
 
 def emailcheck(request):
     email_inp = request.POST.get('forgotEmail')
-    #print('email_inp //////////////////////// : ', email_inp)
 
     user_exists = User.objects.filter(email=email_inp).exists()
-    #print('user_exists //////////////////////// : ', user_exists)
 
     if user_exists:
         # email send function...

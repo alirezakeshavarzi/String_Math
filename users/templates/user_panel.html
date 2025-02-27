@@ -117,7 +117,8 @@
     </div>
 
     <div class="container">
-        <form action="{{% url 'delete' %}}" method="post">
+        <form action="{% url 'delete_acc' %}" method="post">
+            {% csrf_token %}
             <button type="submit" class="delete-btn">Delete Account</button>
         </form>
     </div>

@@ -34,7 +34,7 @@ urlpatterns = [
     # rest password page returned.
     path("rest_password/<str:token>/", rest_pass_view, name='restpass'),
 
-    path("delete", delete_account, name="delete"),
+    path("delete_account", delete_account, name="delete_acc"),
 
 
     # 4. add path from simple jwt
